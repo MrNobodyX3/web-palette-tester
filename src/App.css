@@ -122,26 +122,6 @@
   -moz-user-select: none; /* Firefox */
 }
 
-.option:hover {
-  background-color: #ffffff40;
-}
-
-
-.BW {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  background-color: #fff;
-}
-
-.BW:nth-child(odd) {
-  background-color: #000;
-}
-
-.BW:nth-child(even) {
-  background-color: #fff;
-}
 
 .body {
   display: flex;
