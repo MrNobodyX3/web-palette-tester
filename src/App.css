@@ -25,11 +25,8 @@
 }
 
 .color-picker {
-  border: 3px solid #1f913a;
+  border: 0px solid #1f913a;
   outline: none;
-  border-radius: 10px;
-  margin: none;
-  padding: none;
 }
 
 .Main-body {
