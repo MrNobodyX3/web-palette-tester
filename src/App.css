@@ -49,6 +49,17 @@
   margin-bottom: 5rem;
 }
 
+.alert {
+  width: 80%;
+  border-radius: 10px;
+  font-size: .75em;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  padding: .5rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
 .header {
   grid-area: head;
   display: flex;

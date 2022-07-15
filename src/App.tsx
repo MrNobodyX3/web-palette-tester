@@ -26,6 +26,13 @@ function App() {
   const [CardTextColor, setCardTextColor] = useState("#ffffff");
   const [hyperlinkColor, setHyperlinkColor] = useState("#00bcd4");
 
+  const [AlertGoodColor, setAlertGoodColor] = useState("#4CAF50");
+  const [AlertGoodTextColor, setAlertTextColor] = useState("#1C1F10");
+  const [AlertBadColor, setAlertBadColor] = useState("#F44336");
+  const [AlertBadTextColor, setAlertBadTextColor] = useState("#141316");
+  const [AlertWarningColor, setAlertWarningColor] = useState("#FF9800");
+  const [AlertWarningTextColor, setAlertWarningTextColor] = useState("#1F1800");
+
   const [PanelColor, setPanelColor] = useState("#2A3441");
   const [OptionBackgroundColor, setOptionBackgroundColor] = useState("#2A3441");
   const [OptionTextColor, setOptionTextColor] = useState("#ffffff");
@@ -111,6 +118,60 @@ function App() {
               type="color"
               value={BodyColor}
               onChange={(e) => setBodyColor(e.target.value)}
+            />
+          </h5>
+          <h5 className="values">
+            Alert Good{" "}
+            <input
+              className="color-picker"
+              type="color"
+              value={AlertGoodColor}
+              onChange={(e) => setAlertGoodColor(e.target.value)}
+            />
+          </h5>
+          <h5 className="values">
+            Good Text{" "}
+            <input
+              className="color-picker"
+              type="color"
+              value={AlertGoodTextColor}
+              onChange={(e) => setAlertTextColor(e.target.value)}
+            />
+          </h5>
+          <h5 className="values">
+            Alert Bad{" "}
+            <input
+              className="color-picker"
+              type="color"
+              value={AlertBadColor}
+              onChange={(e) => setAlertBadColor(e.target.value)}
+            />
+          </h5>
+          <h5 className="values">
+            Bad Text{" "}
+            <input
+              className="color-picker"
+              type="color"
+              value={AlertBadTextColor}
+              onChange={(e) => setAlertBadTextColor(e.target.value)}
+            />
+          </h5>
+          <h5 className="values">
+            Alert Warning{" "}
+            <input
+              className="color-picker"
+              type="color"
+              value={AlertWarningColor}
+              onChange={(e) => setAlertWarningColor(e.target.value)}
+            />
+          </h5>
+          <h5 className="values">
+            Warning Text{" "}
+            <input
+              className="color-picker"
+              type="color"
+              value={AlertWarningTextColor}
+              onChange={(e) => setAlertWarningTextColor(e.target.value)}
             />
           </h5>
           <h5 className="values">
@@ -221,6 +282,36 @@ function App() {
               }}
             >
               Please note: This is not a layout design suggestion
+            </div>
+            <div
+              className="alert"
+              style={{
+                backgroundColor: AlertGoodColor,
+                color: AlertGoodTextColor,
+                border: `2px solid ${AlertGoodTextColor}`,
+              }}
+            >
+              ALERT: This is a good alert!
+            </div>
+            <div
+              className="alert"
+              style={{
+                backgroundColor: AlertBadColor,
+                color: AlertBadTextColor,
+                border: `2px solid ${AlertBadTextColor}`,
+              }}
+            >
+              ALERT: This is a bad alert!
+            </div>
+            <div
+              className="alert"
+              style={{
+                backgroundColor: AlertWarningColor,
+                color: AlertWarningTextColor,
+                border: `2px solid ${AlertWarningTextColor}`,
+              }}
+            >
+              ALERT: This is a warning alert!
             </div>
             <div className="card" style={{ backgroundColor: CardColor }}>
               <h2 className="card-title" style={{ color: CardTitleColor }}>
