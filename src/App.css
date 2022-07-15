@@ -24,6 +24,27 @@
   overflow: scroll;
 }
 
+.copy-paste {
+  background-color: rgb(84, 97, 117);
+  border: none;
+  border-radius: 1em;
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.copy-paste:hover {
+  background-color: rgb(156, 168, 187);
+}
+
+.copy-paste:active {
+  background-color: rgb(42, 43, 45);
+}
 .color-picker {
   border: 0px solid #1f913a;
   outline: none;

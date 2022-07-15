@@ -48,6 +48,123 @@ function App() {
       <header className="App-header">
         <div className="pallet">
           <h3>Pallet Editor</h3>
+          {/* button to copy all varibles */}
+          <button
+            className="copy-paste"
+            onClick={() => {
+              navigator.clipboard.writeText(
+                `
+                Pallet Title: ${palletTitle}
+                Header Color: ${HeaderColor}
+                Logo Color: ${LogoColor}
+                Header Text Color: ${HeaderTextColor}
+                Body Color: ${BodyColor}
+                Card Color: ${CardColor}
+                Card Title Color: ${CardTitleColor}
+                Card Text Color: ${CardTextColor}
+                Hyperlink Color: ${hyperlinkColor}
+                Alert Good Color: ${AlertGoodColor}
+                Alert Good Text Color: ${AlertGoodTextColor}
+                Alert Bad Color: ${AlertBadColor}
+                Alert Bad Text Color: ${AlertBadTextColor}
+                Alert Warning Color: ${AlertWarningColor}
+                Alert Warning Text Color: ${AlertWarningTextColor}
+                Panel Color: ${PanelColor}
+                Option Background Color: ${OptionBackgroundColor}
+                Option Text Color: ${OptionTextColor}
+                Active Button Color: ${ActiveButtonColor}
+                Active Button Text Color: ${ActiveButtonTextColor}
+                Deactive Button Color: ${DeactiveButtonColor}
+                Deactive Button Text Color: ${DeactiveButtonTextColor}`
+              );
+            }}
+          >
+            Copy Pallet
+          </button>
+          {/* button to paste all varibles */}
+          <button
+            className="copy-paste"
+            onClick={() => {
+              navigator.clipboard.readText().then((text) => {
+                const lines = text.split("\n");
+                lines.forEach((line) => {
+                  const [key, value] = line.split(":");
+                  switch (key) {
+                    case "Pallet Title":
+                      setPalletTitle(value);
+                      break;
+                    case "Header Color":
+                      setHeaderColor(value);
+                      break;
+                    case "Logo Color":
+                      setLogoColor(value);
+                      break;
+                    case "Header Text Color":
+                      setHeaderTextColor(value);
+                      break;
+                    case "Body Color":
+                      setBodyColor(value);
+                      break;
+                    case "Card Color":
+                      setCardColor(value);
+                      break;
+                    case "Card Title Color":
+                      setCardTitleColor(value);
+                      break;
+                    case "Card Text Color":
+                      setCardTextColor(value);
+                      break;
+                    case "Hyperlink Color":
+                      setHyperlinkColor(value);
+                      break;
+                    case "Alert Good Color":
+                      setAlertGoodColor(value);
+                      break;
+                    case "Alert Good Text Color":
+                      setAlertBadTextColor(value);
+                      break;
+                    case "Alert Bad Color":
+                      setAlertBadColor(value);
+                      break;
+                    case "Alert Bad Text Color":
+                      setAlertBadTextColor(value);
+                      break;
+                    case "Alert Warning Color":
+                      setAlertWarningColor(value);
+                      break;
+                    case "Alert Warning Text Color":
+                      setAlertWarningTextColor(value);
+                      break;
+                    case "Panel Color":
+                      setPanelColor(value);
+                      break;
+                    case "Option Background Color":
+                      setOptionBackgroundColor(value);
+                      break;
+                    case "Option Text Color":
+                      setOptionTextColor(value);
+                      break;
+                    case "Active Button Color":
+                      setActiveButtonColor(value);
+                      break;
+                    case "Active Button Text Color":
+                      setActiveButtonTextColor(value);
+                      break;
+                    case "Deactive Button Color":
+                      setDeactiveButtonColor(value);
+                      break;
+                    case "Deactive Button Text Color":
+                      setDeactiveButtonTextColor(value);
+                      break;
+                    default:
+                      break;
+                  }
+                });
+              });
+            }}
+          >
+            Paste Pallet
+          </button>
           <h5>
             Pallet Title
             <input
