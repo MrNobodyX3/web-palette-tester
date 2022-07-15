@@ -54,28 +54,28 @@ function App() {
             onClick={() => {
               navigator.clipboard.writeText(
                 `
-                Pallet Title: ${palletTitle}
-                Header Color: ${HeaderColor}
-                Logo Color: ${LogoColor}
-                Header Text Color: ${HeaderTextColor}
-                Body Color: ${BodyColor}
-                Card Color: ${CardColor}
-                Card Title Color: ${CardTitleColor}
-                Card Text Color: ${CardTextColor}
-                Hyperlink Color: ${hyperlinkColor}
-                Alert Good Color: ${AlertGoodColor}
-                Alert Good Text Color: ${AlertGoodTextColor}
-                Alert Bad Color: ${AlertBadColor}
-                Alert Bad Text Color: ${AlertBadTextColor}
-                Alert Warning Color: ${AlertWarningColor}
-                Alert Warning Text Color: ${AlertWarningTextColor}
-                Panel Color: ${PanelColor}
-                Option Background Color: ${OptionBackgroundColor}
-                Option Text Color: ${OptionTextColor}
-                Active Button Color: ${ActiveButtonColor}
-                Active Button Text Color: ${ActiveButtonTextColor}
-                Deactive Button Color: ${DeactiveButtonColor}
-                Deactive Button Text Color: ${DeactiveButtonTextColor}`
+Pallet Title: ${palletTitle}
+Header Color: ${HeaderColor}
+Logo Color: ${LogoColor}
+Header Text Color: ${HeaderTextColor}
+Body Color: ${BodyColor}
+Card Color: ${CardColor}
+Card Title Color: ${CardTitleColor}
+Card Text Color: ${CardTextColor}
+Hyperlink Color: ${hyperlinkColor}
+Alert Good Color: ${AlertGoodColor}
+Alert Good Text Color: ${AlertGoodTextColor}
+Alert Bad Color: ${AlertBadColor}
+Alert Bad Text Color: ${AlertBadTextColor}
+Alert Warning Color: ${AlertWarningColor}
+Alert Warning Text Color: ${AlertWarningTextColor}
+Panel Color: ${PanelColor}
+Option Background Color: ${OptionBackgroundColor}
+Option Text Color: ${OptionTextColor}
+Active Button Color: ${ActiveButtonColor}
+Active Button Text Color: ${ActiveButtonTextColor}
+Deactive Button Color: ${DeactiveButtonColor}
+Deactive Button Text Color: ${DeactiveButtonTextColor}`
               );
             }}
           >
