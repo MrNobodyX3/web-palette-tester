@@ -134,6 +134,8 @@
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Firefox */
+  user-select: none;
+  cursor: default;
 }
 
 .option {
@@ -147,8 +149,9 @@
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Firefox */
+  user-select: none;
+  cursor: default;
 }
-
 
 .body {
   display: flex;
