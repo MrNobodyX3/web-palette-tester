@@ -24,6 +24,7 @@ function App() {
   const [CardColor, setCardColor] = useState("#1F2D3D");
   const [CardTitleColor, setCardTitleColor] = useState("#ffffff");
   const [CardTextColor, setCardTextColor] = useState("#ffffff");
+  const [hyperlinkColor, setHyperlinkColor] = useState("#00bcd4");
 
   const [PanelColor, setPanelColor] = useState("#2A3441");
   const [OptionBackgroundColor, setOptionBackgroundColor] = useState("#2A3441");
@@ -43,6 +44,7 @@ function App() {
           <h5>
             Pallet Title
             <input
+              className="color-picker"
               type="text"
               value={palletTitle}
               onChange={(e) => setPalletTitle(e.target.value)}
@@ -51,6 +53,7 @@ function App() {
           <h5 className="values">
             Logo{" "}
             <input
+              className="color-picker"
               type="color"
               value={LogoColor}
               onChange={(e) => setLogoColor(e.target.value)}
@@ -59,6 +62,7 @@ function App() {
           <h5 className="values">
             Header{" "}
             <input
+              className="color-picker"
               type="color"
               value={HeaderColor}
               onChange={(e) => setHeaderColor(e.target.value)}
@@ -67,6 +71,7 @@ function App() {
           <h5 className="values">
             Header Text{" "}
             <input
+              className="color-picker"
               type="color"
               value={HeaderTextColor}
               onChange={(e) => setHeaderTextColor(e.target.value)}
@@ -75,6 +80,7 @@ function App() {
           <h5 className="values">
             Panel{" "}
             <input
+              className="color-picker"
               type="color"
               value={PanelColor}
               onChange={(e) => setPanelColor(e.target.value)}
@@ -83,6 +89,7 @@ function App() {
           <h5 className="values">
             Option BG{" "}
             <input
+              className="color-picker"
               type="color"
               value={OptionBackgroundColor}
               onChange={(e) => setOptionBackgroundColor(e.target.value)}
@@ -91,6 +98,7 @@ function App() {
           <h5 className="values">
             Option Text{" "}
             <input
+              className="color-picker"
               type="color"
               value={OptionTextColor}
               onChange={(e) => setOptionTextColor(e.target.value)}
@@ -99,6 +107,7 @@ function App() {
           <h5 className="values">
             Body{" "}
             <input
+              className="color-picker"
               type="color"
               value={BodyColor}
               onChange={(e) => setBodyColor(e.target.value)}
@@ -107,6 +116,7 @@ function App() {
           <h5 className="values">
             Card{" "}
             <input
+              className="color-picker"
               type="color"
               value={CardColor}
               onChange={(e) => setCardColor(e.target.value)}
@@ -115,6 +125,7 @@ function App() {
           <h5 className="values">
             Card Title{" "}
             <input
+              className="color-picker"
               type="color"
               value={CardTitleColor}
               onChange={(e) => setCardTitleColor(e.target.value)}
@@ -123,22 +134,34 @@ function App() {
           <h5 className="values">
             Card Text{" "}
             <input
+              className="color-picker"
               type="color"
               value={CardTextColor}
               onChange={(e) => setCardTextColor(e.target.value)}
             />
           </h5>
           <h5 className="values">
+            Hyperlink{" "}
+            <input
+              className="color-picker"
+              type="color"
+              value={hyperlinkColor}
+              onChange={(e) => setHyperlinkColor(e.target.value)}
+            />
+          </h5>
+          <h5 className="values">
             Active Button{" "}
             <input
+              className="color-picker"
               type="color"
               value={ActiveButtonColor}
               onChange={(e) => setActiveButtonColor(e.target.value)}
             />
           </h5>
           <h5 className="values">
-            Active Button Text{" "}
+            Active Text{" "}
             <input
+              className="color-picker"
               type="color"
               value={ActiveButtonTextColor}
               onChange={(e) => setActiveButtonTextColor(e.target.value)}
@@ -147,14 +170,16 @@ function App() {
           <h5 className="values">
             Deactive Button{" "}
             <input
+              className="color-picker"
               type="color"
               value={DeactiveButtonColor}
               onChange={(e) => setDeactiveButtonColor(e.target.value)}
             />
           </h5>
           <h5 className="values">
-            Deactive Button Text{" "}
+            Deactive Text{" "}
             <input
+              className="color-picker"
               type="color"
               value={DeactiveButtonTextColor}
               onChange={(e) => setDeactiveButtonTextColor(e.target.value)}
@@ -203,9 +228,12 @@ function App() {
               </h2>
               <div className="card-text" style={{ color: CardTextColor }}>
                 Lorem ipsum dolor sit amet, consectetur{" "}
-                <span className="hyper-link">Hyper link</span> adipiscing elit.
-                Pellentesque euismod, nisi vel consectetur euismod, nisl nisl
-                consectetur nisl, eget consectetur nisl nisl eget nisl.
+                <span className="hyper-link" style={{ color: hyperlinkColor }}>
+                  Hyper link
+                </span>{" "}
+                adipiscing elit. Pellentesque euismod, nisi vel consectetur
+                euismod, nisl nisl consectetur nisl, eget consectetur nisl nisl
+                eget nisl.
               </div>
 
               <div>
