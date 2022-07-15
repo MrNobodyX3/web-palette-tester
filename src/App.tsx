@@ -13,35 +13,129 @@ function hexToHsv(hex: any) {
   return h;
 }
 
+type Field = {
+  displayName: string;
+  name: string;
+  defaultValue: string;
+  fieldType?: string;
+};
+
+const FIELDS: Field[] = [
+  {
+    displayName: "Palette Title",
+    name: "palette_title",
+    defaultValue: "Palette Title",
+    fieldType: "text",
+  },
+  {
+    displayName: "Header Color",
+    name: "header",
+    defaultValue: "#4a5c73",
+  },
+  {
+    displayName: "Header Text",
+    name: "header_text",
+    defaultValue: "#ffffff",
+  },
+  {
+    displayName: "Panel Color",
+    name: "panel",
+    defaultValue: "#2a3441",
+  },
+  {
+    displayName: "Panel Options BG",
+    name: "panel_options_bg",
+    defaultValue: "#2a3441",
+  },
+  {
+    displayName: "Panel Options Text",
+    name: "panel_options_text",
+    defaultValue: "#ffffff",
+  },
+  {
+    displayName: "Body Color",
+    name: "body",
+    defaultValue: "#121521",
+  },
+  {
+    displayName: "Alert Good",
+    name: "alert_good",
+    defaultValue: "#4CAF50",
+  },
+  {
+    displayName: "Alert Good Text",
+    name: "alert_good_text",
+    defaultValue: "#1C1F10",
+  },
+  {
+    displayName: "Alert Bad",
+    name: "alert_bad",
+    defaultValue: "#F44336",
+  },
+  {
+    displayName: "Alert Bad Text",
+    name: "alert_bad_text",
+    defaultValue: "#1C1F10",
+  },
+  {
+    displayName: "Alert Warning",
+    name: "alert_warning",
+    defaultValue: "#FF9800",
+  },
+  {
+    displayName: "Alert Warning Text",
+    name: "alert_warning_text",
+    defaultValue: "#1C1F10",
+  },
+  {
+    displayName: "Card Background",
+    name: "card_bg",
+    defaultValue: "#1F2D3D",
+  },
+  {
+    displayName: "Card Title",
+    name: "card_title",
+    defaultValue: "#ffffff",
+  },
+  {
+    displayName: "Card Text",
+    name: "card_text",
+    defaultValue: "#ffffff",
+  },
+  {
+    displayName: "Hyperlink",
+    name: "hyperlink",
+    defaultValue: "#00bcd4",
+  },
+  {
+    displayName: "Active Button",
+    name: "active_button",
+    defaultValue: "#1515ff",
+  },
+  {
+    displayName: "Active Text",
+    name: "active_text",
+    defaultValue: "#ffffff",
+  },
+  {
+    displayName: "Disabled Button",
+    name: "disabled_button",
+    defaultValue: "#aaaaff",
+  },
+  {
+    displayName: "Disabled Text",
+    name: "disabled_text",
+    defaultValue: "#151515",
+  },
+];
+
 function App() {
-  const [palletTitle, setPalletTitle] = useState("Pallet Title");
-
-  const [HeaderColor, setHeaderColor] = useState("#4A5C73");
-  const [LogoColor, setLogoColor] = useState("#ffffff");
-  const [HeaderTextColor, setHeaderTextColor] = useState("#ffffff");
-
-  const [BodyColor, setBodyColor] = useState("#121521");
-  const [CardColor, setCardColor] = useState("#1F2D3D");
-  const [CardTitleColor, setCardTitleColor] = useState("#ffffff");
-  const [CardTextColor, setCardTextColor] = useState("#ffffff");
-  const [hyperlinkColor, setHyperlinkColor] = useState("#00bcd4");
-
-  const [AlertGoodColor, setAlertGoodColor] = useState("#4CAF50");
-  const [AlertGoodTextColor, setAlertTextColor] = useState("#1C1F10");
-  const [AlertBadColor, setAlertBadColor] = useState("#F44336");
-  const [AlertBadTextColor, setAlertBadTextColor] = useState("#141316");
-  const [AlertWarningColor, setAlertWarningColor] = useState("#FF9800");
-  const [AlertWarningTextColor, setAlertWarningTextColor] = useState("#1F1800");
-
-  const [PanelColor, setPanelColor] = useState("#2A3441");
-  const [OptionBackgroundColor, setOptionBackgroundColor] = useState("#2A3441");
-  const [OptionTextColor, setOptionTextColor] = useState("#ffffff");
-
-  const [ActiveButtonColor, setActiveButtonColor] = useState("#1515ff");
-  const [ActiveButtonTextColor, setActiveButtonTextColor] = useState("#ffffff");
-  const [DeactiveButtonColor, setDeactiveButtonColor] = useState("#aaaaff");
-  const [DeactiveButtonTextColor, setDeactiveButtonTextColor] =
-    useState("#151515");
+  const [palette, setPalette] = useState(() =>
+    FIELDS.reduce((acc, field) => {
+      acc[field.name] = field.defaultValue;
+      return acc;
+    }, {} as { [key: string]: string })
+  );
 
   return (
     <div className="App">
@@ -52,31 +146,7 @@ function App() {
           <button
             className="copy-paste"
             onClick={() => {
-              navigator.clipboard.writeText(
-                `
-Pallet Title: ${palletTitle}
-Header Color: ${HeaderColor}
-Logo Color: ${LogoColor}
-Header Text Color: ${HeaderTextColor}
-Body Color: ${BodyColor}
-Card Color: ${CardColor}
-Card Title Color: ${CardTitleColor}
-Card Text Color: ${CardTextColor}
-Hyperlink Color: ${hyperlinkColor}
-Alert Good Color: ${AlertGoodColor}
-Alert Good Text Color: ${AlertGoodTextColor}
-Alert Bad Color: ${AlertBadColor}
-Alert Bad Text Color: ${AlertBadTextColor}
-Alert Warning Color: ${AlertWarningColor}
-Alert Warning Text Color: ${AlertWarningTextColor}
-Panel Color: ${PanelColor}
-Option Background Color: ${OptionBackgroundColor}
-Option Text Color: ${OptionTextColor}
-Active Button Color: ${ActiveButtonColor}
-Active Button Text Color: ${ActiveButtonTextColor}
-Deactive Button Color: ${DeactiveButtonColor}
-Deactive Button Text Color: ${DeactiveButtonTextColor}`
-              );
+              navigator.clipboard.writeText(JSON.stringify(palette));
             }}
           >
             Copy Pallet
@@ -86,316 +156,67 @@ Deactive Button Text Color: ${DeactiveButtonTextColor}`
             className="copy-paste"
             onClick={() => {
               navigator.clipboard.readText().then((text) => {
-                const lines = text.split("\n");
-                lines.forEach((line) => {
-                  const [key, value] = line.split(":");
-                  switch (key) {
-                    case "Pallet Title":
-                      setPalletTitle(value);
-                      break;
-                    case "Header Color":
-                      setHeaderColor(value);
-                      break;
-                    case "Logo Color":
-                      setLogoColor(value);
-                      break;
-                    case "Header Text Color":
-                      setHeaderTextColor(value);
-                      break;
-                    case "Body Color":
-                      setBodyColor(value);
-                      break;
-                    case "Card Color":
-                      setCardColor(value);
-                      break;
-                    case "Card Title Color":
-                      setCardTitleColor(value);
-                      break;
-                    case "Card Text Color":
-                      setCardTextColor(value);
-                      break;
-                    case "Hyperlink Color":
-                      setHyperlinkColor(value);
-                      break;
-                    case "Alert Good Color":
-                      setAlertGoodColor(value);
-                      break;
-                    case "Alert Good Text Color":
-                      setAlertBadTextColor(value);
-                      break;
-                    case "Alert Bad Color":
-                      setAlertBadColor(value);
-                      break;
-                    case "Alert Bad Text Color":
-                      setAlertBadTextColor(value);
-                      break;
-                    case "Alert Warning Color":
-                      setAlertWarningColor(value);
-                      break;
-                    case "Alert Warning Text Color":
-                      setAlertWarningTextColor(value);
-                      break;
-                    case "Panel Color":
-                      setPanelColor(value);
-                      break;
-                    case "Option Background Color":
-                      setOptionBackgroundColor(value);
-                      break;
-                    case "Option Text Color":
-                      setOptionTextColor(value);
-                      break;
-                    case "Active Button Color":
-                      setActiveButtonColor(value);
-                      break;
-                    case "Active Button Text Color":
-                      setActiveButtonTextColor(value);
-                      break;
-                    case "Deactive Button Color":
-                      setDeactiveButtonColor(value);
-                      break;
-                    case "Deactive Button Text Color":
-                      setDeactiveButtonTextColor(value);
-                      break;
-                    default:
-                      break;
-                  }
-                });
+                setPalette(JSON.parse(text));
               });
             }}
           >
             Paste Pallet
           </button>
-          <h5>
-            Pallet Title
-            <input
-              className="color-picker"
-              type="text"
-              value={palletTitle}
-              onChange={(e) => setPalletTitle(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Logo{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={LogoColor}
-              onChange={(e) => setLogoColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Header{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={HeaderColor}
-              onChange={(e) => setHeaderColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Header Text{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={HeaderTextColor}
-              onChange={(e) => setHeaderTextColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Panel{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={PanelColor}
-              onChange={(e) => setPanelColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Option BG{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={OptionBackgroundColor}
-              onChange={(e) => setOptionBackgroundColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Option Text{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={OptionTextColor}
-              onChange={(e) => setOptionTextColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Body{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={BodyColor}
-              onChange={(e) => setBodyColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Alert Good{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={AlertGoodColor}
-              onChange={(e) => setAlertGoodColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Good Text{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={AlertGoodTextColor}
-              onChange={(e) => setAlertTextColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Alert Bad{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={AlertBadColor}
-              onChange={(e) => setAlertBadColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Bad Text{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={AlertBadTextColor}
-              onChange={(e) => setAlertBadTextColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Alert Warning{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={AlertWarningColor}
-              onChange={(e) => setAlertWarningColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Warning Text{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={AlertWarningTextColor}
-              onChange={(e) => setAlertWarningTextColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Card{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={CardColor}
-              onChange={(e) => setCardColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Card Title{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={CardTitleColor}
-              onChange={(e) => setCardTitleColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Card Text{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={CardTextColor}
-              onChange={(e) => setCardTextColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Hyperlink{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={hyperlinkColor}
-              onChange={(e) => setHyperlinkColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Active Button{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={ActiveButtonColor}
-              onChange={(e) => setActiveButtonColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Active Text{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={ActiveButtonTextColor}
-              onChange={(e) => setActiveButtonTextColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Deactive Button{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={DeactiveButtonColor}
-              onChange={(e) => setDeactiveButtonColor(e.target.value)}
-            />
-          </h5>
-          <h5 className="values">
-            Deactive Text{" "}
-            <input
-              className="color-picker"
-              type="color"
-              value={DeactiveButtonTextColor}
-              onChange={(e) => setDeactiveButtonTextColor(e.target.value)}
-            />
-          </h5>
+          {FIELDS.map((field) => (
+            <div className="color-option">
+              {field.displayName}{" "}
+              <input
+                className="color-picker"
+                type={field.fieldType || "color"}
+                value={palette[field.name]}
+                onChange={(e) => {
+                  setPalette({
+                    ...palette,
+                    [field.name]: e.target.value,
+                  });
+                }}
+              />
+            </div>
+          ))}
         </div>
         <div className="Main-body">
-          <div className="header" style={{ backgroundColor: HeaderColor }}>
-            <div className="header-logo" style={{ color: LogoColor }}>
+          <div
+            className="header"
+            style={{ backgroundColor: palette["header"] }}
+          >
+            <div className="header-logo" style={{ color: palette["logo"] }}>
               Logo
             </div>
             {Array.from(Array(4).keys()).map((i) => (
-              <div className="menu" style={{ color: HeaderTextColor }}>
+              <div className="menu" style={{ color: palette["header_text"] }}>
                 Menu {1 + i}
               </div>
             ))}
-            <div className="pallet-title" style={{ color: HeaderTextColor }}>
-              {palletTitle}
+            <div
+              className="pallet-title"
+              style={{ color: palette["header_text"] }}
+            >
+              {palette["palette_title"]}
             </div>
           </div>
-          <div className="panel" style={{ backgroundColor: PanelColor }}>
+          <div className="panel" style={{ backgroundColor: palette["panel"] }}>
             {Array.from(Array(4).keys()).map((i) => (
               <div
                 className="option"
                 style={{
-                  backgroundColor: OptionBackgroundColor,
-                  color: OptionTextColor,
+                  backgroundColor: palette["panel_options_bg"],
+                  color: palette["panel_options_text"],
                 }}
               >
                 Option {1 + i}
               </div>
             ))}
           </div>
-          <div className="body" style={{ backgroundColor: BodyColor }}>
+          <div className="body" style={{ backgroundColor: palette["body"] }}>
             <div
               className="notice"
               style={{
-                color: hexToHsv(BodyColor) > 150 ? "#000000" : "#ffffff",
+                color: hexToHsv(palette["body"]) > 150 ? "#000000" : "#ffffff",
               }}
             >
               Please note: This is not a layout design suggestion
@@ -403,9 +224,9 @@ Deactive Button Text Color: ${DeactiveButtonTextColor}`
             <div
               className="alert"
               style={{
-                backgroundColor: AlertGoodColor,
-                color: AlertGoodTextColor,
-                border: `2px solid ${AlertGoodTextColor}`,
+                backgroundColor: palette["alert_good"],
+                color: palette["alert_good_text"],
+                border: `2px solid ${palette["alert_good_text"]}`,
               }}
             >
               ALERT: This is a good alert!
@@ -413,9 +234,9 @@ Deactive Button Text Color: ${DeactiveButtonTextColor}`
             <div
               className="alert"
               style={{
-                backgroundColor: AlertBadColor,
-                color: AlertBadTextColor,
-                border: `2px solid ${AlertBadTextColor}`,
+                backgroundColor: palette["alert_bad"],
+                color: palette["alert_bad_text"],
+                border: `2px solid ${palette["alert_bad_text"]}`,
               }}
             >
               ALERT: This is a bad alert!
@@ -423,20 +244,32 @@ Deactive Button Text Color: ${DeactiveButtonTextColor}`
             <div
               className="alert"
               style={{
-                backgroundColor: AlertWarningColor,
-                color: AlertWarningTextColor,
-                border: `2px solid ${AlertWarningTextColor}`,
+                backgroundColor: palette["alert_warning"],
+                color: palette["alert_warning_text"],
+                border: `2px solid ${palette["alert_warning_text"]}`,
               }}
             >
               ALERT: This is a warning alert!
             </div>
-            <div className="card" style={{ backgroundColor: CardColor }}>
-              <h2 className="card-title" style={{ color: CardTitleColor }}>
+            <div
+              className="card"
+              style={{ backgroundColor: palette["card_bg"] }}
+            >
+              <h2
+                className="card-title"
+                style={{ color: palette["card_title"] }}
+              >
                 Card Title
               </h2>
-              <div className="card-text" style={{ color: CardTextColor }}>
+              <div
+                className="card-text"
+                style={{ color: palette["card_text"] }}
+              >
                 Lorem ipsum dolor sit amet, consectetur{" "}
-                <span className="hyper-link" style={{ color: hyperlinkColor }}>
+                <span
+                  className="hyper-link"
+                  style={{ color: palette["hyperlink"] }}
+                >
                   Hyper link
                 </span>{" "}
                 adipiscing elit. Pellentesque euismod, nisi vel consectetur
@@ -448,8 +281,8 @@ Deactive Button Text Color: ${DeactiveButtonTextColor}`
                 <button
                   className="button"
                   style={{
-                    backgroundColor: ActiveButtonColor,
-                    color: ActiveButtonTextColor,
+                    backgroundColor: palette["active_button"],
+                    color: palette["active_text"],
                   }}
                 >
                   Active Button
@@ -457,8 +290,8 @@ Deactive Button Text Color: ${DeactiveButtonTextColor}`
                 <button
                   className="button"
                   style={{
-                    backgroundColor: DeactiveButtonColor,
-                    color: DeactiveButtonTextColor,
+                    backgroundColor: palette["disabled_button"],
+                    color: palette["disabled_text"],
                   }}
                 >
                   Deactive Button

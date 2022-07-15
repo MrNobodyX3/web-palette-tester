@@ -45,6 +45,12 @@
 .copy-paste:active {
   background-color: rgb(42, 43, 45);
 }
+
+.color-option {
+  margin: .5rem;
+  font-size: medium;
+}
+
 .color-picker {
   border: 0px solid #1f913a;
   outline: none;
