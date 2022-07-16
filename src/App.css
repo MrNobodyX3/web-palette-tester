@@ -18,10 +18,47 @@
   max-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: start;
   color: rgb(255, 255, 255);
   overflow: scroll;
+  position: relative;
+}
+
+.grid-toggle {
+  background-color: rgb(169, 169, 169);
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  left: auto;
+  bottom: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(auto, 1fr);
+  grid-gap: .2em;
+  margin: .2rem;
+  position: relative;
+}
+
+.grid-square {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: end;
+  font-size: medium;
+  font-weight: 650;
+  border-radius: 5px;
+  padding: 5px;
+}
+.grid-edit {
+  background-color: none;
+  border: none;
 }
 
 .copy-paste {
@@ -46,9 +83,19 @@
   background-color: rgb(42, 43, 45);
 }
 
-.color-option {
+.color-field {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   margin: .5rem;
   font-size: medium;
+  padding: .2rem;
+}
+
+.color-field:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.168);
 }
 
 .color-picker {

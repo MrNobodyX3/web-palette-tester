@@ -33,6 +33,11 @@ const FIELDS: Field[] = [
     defaultValue: "#4a5c73",
   },
   {
+    displayName: "Logo Color",
+    name: "logo",
+    defaultValue: "#ffffff",
+  },
+  {
     displayName: "Header Text",
     name: "header_text",
     defaultValue: "#ffffff",
@@ -137,12 +142,19 @@ function App() {
     }, {} as { [key: string]: string })
   );
 
+  const [gridToggle, setGridToggle] = useState(true);
+
   return (
     <div className="App">
       <header className="App-header">
         <div className="pallet">
+          <button
+            className="grid-toggle"
+            onClick={() => setGridToggle(!gridToggle)}
+          >
+            {gridToggle ? "Show Grid" : "Hide Grid"}
+          </button>
           <h3>Pallet Editor</h3>
-          {/* button to copy all varibles */}
           <button
             className="copy-paste"
             onClick={() => {
@@ -151,7 +163,6 @@ function App() {
           >
             Copy Pallet
           </button>
-          {/* button to paste all varibles */}
           <button
             className="copy-paste"
             onClick={() => {
@@ -163,8 +174,8 @@ function App() {
             Paste Pallet
           </button>
           {FIELDS.map((field) => (
-            <div className="color-option">
-              {field.displayName}{" "}
+            <div className="color-field">
+              {field.displayName}
               <input
                 className="color-picker"
                 type={field.fieldType || "color"}
@@ -179,127 +190,153 @@ function App() {
             </div>
           ))}
         </div>
-        <div className="Main-body">
-          <div
-            className="header"
-            style={{ backgroundColor: palette["header"] }}
-          >
-            <div className="header-logo" style={{ color: palette["logo"] }}>
-              Logo
-            </div>
-            {Array.from(Array(4).keys()).map((i) => (
-              <div className="menu" style={{ color: palette["header_text"] }}>
-                Menu {1 + i}
-              </div>
-            ))}
+        {gridToggle ? (
+          <div className="Main-body">
             <div
-              className="pallet-title"
-              style={{ color: palette["header_text"] }}
+              className="header"
+              style={{ backgroundColor: palette["header"] }}
             >
-              {palette["palette_title"]}
-            </div>
-          </div>
-          <div className="panel" style={{ backgroundColor: palette["panel"] }}>
-            {Array.from(Array(4).keys()).map((i) => (
+              <div className="header-logo" style={{ color: palette["logo"] }}>
+                Logo
+              </div>
+              {Array.from(Array(4).keys()).map((i) => (
+                <div className="menu" style={{ color: palette["header_text"] }}>
+                  Menu {1 + i}
+                </div>
+              ))}
               <div
-                className="option"
+                className="pallet-title"
+                style={{ color: palette["header_text"] }}
+              >
+                {palette["palette_title"]}
+              </div>
+            </div>
+            <div
+              className="panel"
+              style={{ backgroundColor: palette["panel"] }}
+            >
+              {Array.from(Array(4).keys()).map((i) => (
+                <div
+                  className="option"
+                  style={{
+                    backgroundColor: palette["panel_options_bg"],
+                    color: palette["panel_options_text"],
+                  }}
+                >
+                  Option {1 + i}
+                </div>
+              ))}
+            </div>
+            <div className="body" style={{ backgroundColor: palette["body"] }}>
+              <div
+                className="notice"
                 style={{
-                  backgroundColor: palette["panel_options_bg"],
-                  color: palette["panel_options_text"],
+                  color:
+                    hexToHsv(palette["body"]) > 150 ? "#000000" : "#ffffff",
                 }}
               >
-                Option {1 + i}
+                Please note: This is not a layout design suggestion
               </div>
-            ))}
-          </div>
-          <div className="body" style={{ backgroundColor: palette["body"] }}>
-            <div
-              className="notice"
-              style={{
-                color: hexToHsv(palette["body"]) > 150 ? "#000000" : "#ffffff",
-              }}
-            >
-              Please note: This is not a layout design suggestion
-            </div>
-            <div
-              className="alert"
-              style={{
-                backgroundColor: palette["alert_good"],
-                color: palette["alert_good_text"],
-                border: `2px solid ${palette["alert_good_text"]}`,
-              }}
-            >
-              ALERT: This is a good alert!
-            </div>
-            <div
-              className="alert"
-              style={{
-                backgroundColor: palette["alert_bad"],
-                color: palette["alert_bad_text"],
-                border: `2px solid ${palette["alert_bad_text"]}`,
-              }}
-            >
-              ALERT: This is a bad alert!
-            </div>
-            <div
-              className="alert"
-              style={{
-                backgroundColor: palette["alert_warning"],
-                color: palette["alert_warning_text"],
-                border: `2px solid ${palette["alert_warning_text"]}`,
-              }}
-            >
-              ALERT: This is a warning alert!
-            </div>
-            <div
-              className="card"
-              style={{ backgroundColor: palette["card_bg"] }}
-            >
-              <h2
-                className="card-title"
-                style={{ color: palette["card_title"] }}
-              >
-                Card Title
-              </h2>
               <div
-                className="card-text"
-                style={{ color: palette["card_text"] }}
+                className="alert"
+                style={{
+                  backgroundColor: palette["alert_good"],
+                  color: palette["alert_good_text"],
+                  border: `2px solid ${palette["alert_good_text"]}`,
+                }}
               >
-                Lorem ipsum dolor sit amet, consectetur{" "}
-                <span
-                  className="hyper-link"
-                  style={{ color: palette["hyperlink"] }}
-                >
-                  Hyper link
-                </span>{" "}
-                adipiscing elit. Pellentesque euismod, nisi vel consectetur
-                euismod, nisl nisl consectetur nisl, eget consectetur nisl nisl
-                eget nisl.
+                ALERT: This is a good alert!
               </div>
+              <div
+                className="alert"
+                style={{
+                  backgroundColor: palette["alert_bad"],
+                  color: palette["alert_bad_text"],
+                  border: `2px solid ${palette["alert_bad_text"]}`,
+                }}
+              >
+                ALERT: This is a bad alert!
+              </div>
+              <div
+                className="alert"
+                style={{
+                  backgroundColor: palette["alert_warning"],
+                  color: palette["alert_warning_text"],
+                  border: `2px solid ${palette["alert_warning_text"]}`,
+                }}
+              >
+                ALERT: This is a warning alert!
+              </div>
+              <div
+                className="card"
+                style={{ backgroundColor: palette["card_bg"] }}
+              >
+                <h2
+                  className="card-title"
+                  style={{ color: palette["card_title"] }}
+                >
+                  Card Title
+                </h2>
+                <div
+                  className="card-text"
+                  style={{ color: palette["card_text"] }}
+                >
+                  Lorem ipsum dolor sit amet, consectetur{" "}
+                  <span
+                    className="hyper-link"
+                    style={{ color: palette["hyperlink"] }}
+                  >
+                    Hyper link
+                  </span>{" "}
+                  adipiscing elit. Pellentesque euismod, nisi vel consectetur
+                  euismod, nisl nisl consectetur nisl, eget consectetur nisl
+                  nisl eget nisl.
+                </div>
 
-              <div>
-                <button
-                  className="button"
-                  style={{
-                    backgroundColor: palette["active_button"],
-                    color: palette["active_text"],
-                  }}
-                >
-                  Active Button
-                </button>
-                <button
-                  className="button"
-                  style={{
-                    backgroundColor: palette["disabled_button"],
-                    color: palette["disabled_text"],
-                  }}
-                >
-                  Deactive Button
-                </button>
+                <div>
+                  <button
+                    className="button"
+                    style={{
+                      backgroundColor: palette["active_button"],
+                      color: palette["active_text"],
+                    }}
+                  >
+                    Active Button
+                  </button>
+                  <button
+                    className="button"
+                    style={{
+                      backgroundColor: palette["disabled_button"],
+                      color: palette["disabled_text"],
+                    }}
+                  >
+                    Deactive Button
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="grid">
+            {FIELDS.filter((x) => !x.fieldType || x.fieldType == "color").map(
+              (field) => (
+                <div
+                  className="grid-square"
+                  style={{
+                    backgroundColor: palette[field.name],
+                    color:
+                      hexToHsv(palette[field.name]) > 150
+                        ? "#000000"
+                        : "#ffffff",
+                  }}
+                >
+                  <div>{field.displayName}</div>
+                  <div>{palette[field.name]}</div>
+                </div>
+              )
+            )}
+          </div>
+        )}
       </header>
     </div>
   );
