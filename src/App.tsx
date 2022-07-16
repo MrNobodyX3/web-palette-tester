@@ -154,7 +154,7 @@ function App() {
           >
             {gridToggle ? "Show Grid" : "Hide Grid"}
           </button>
-          <h3>Pallet Editor</h3>
+          <div className="palette-header">Pallet Editor</div>
           <button
             className="copy-paste"
             onClick={() => {
